@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
+// import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
 declare var $:any
 
 @Component({
@@ -10,21 +10,21 @@ declare var $:any
 })
 export class AppComponent {
   title = 'EticaretClient';
-  constructor(private toastrService: CustomToastrService){
-    // this.toastrService.warning("Başarılı şekilde oluşturuldu","Sipariş");
-    toastrService.message("Sipariş sevilay alındı", "Sipariş", {
-      messageType: ToastrMessageType.Success,
-      position: ToastrPosition.BottomCenter
+  constructor(){
+    // // this.toastrService.warning("Başarılı şekilde oluşturuldu","Sipariş");
+    // toastrService.message("Sipariş ali alındı", "Sipariş", {
+    //   messageType: ToastrMessageType.Success,
+    //   position: ToastrPosition.BottomCenter
 
-    })
-    toastrService.message("Sipariş ibo alındı", "Sipariş",{
-      messageType: ToastrMessageType.Error,
-      position: ToastrPosition.TopFullWidth
-    })
-    toastrService.message("Sipariş samet alındı", "Sipariş",{
-      messageType:ToastrMessageType.Info,
-      position: ToastrPosition.BottomLeft
-    } )
+    // })
+    // toastrService.message("Sipariş ibo alındı", "Sipariş",{
+    //   messageType: ToastrMessageType.Error,
+    //   position: ToastrPosition.TopFullWidth
+    // })
+    // toastrService.message("Sipariş samet alındı", "Sipariş",{
+    //   messageType:ToastrMessageType.Info,
+    //   position: ToastrPosition.BottomLeft
+    // } )
 
   }
 }
