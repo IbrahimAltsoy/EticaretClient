@@ -22,8 +22,8 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)} ${id ? `/${id}`: ""}`;
-    return this.httpClient.get<T>(url, {headers: requestParameters.header})
+    url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.querystring ? `?${requestParameters.querystring}` : ""}`;
+    return this.httpClient.get<T>(url, {headers: requestParameters.header});
 
 
 
@@ -33,7 +33,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}`
+    url = `${this.url(requestParameters)}${requestParameters.querystring ? `?${requestParameters.querystring}`: ""}`
     return this.httpClient.post<T>(url, body, {headers: requestParameters.header});
 
   }
@@ -42,7 +42,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}`;
+    url = `${this.url(requestParameters)}${requestParameters.querystring ? `?${requestParameters.querystring}`: ""}`;
     return this.httpClient.put<T>(url, body, {headers:requestParameters.header});
 
   }
@@ -52,7 +52,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}/${id}`;
+    url = `${this.url(requestParameters)}/${id}${requestParameters.querystring ? `?${requestParameters.querystring}`: ""}`;
     return this.httpClient.delete<T>(url, {headers:requestParameters.header});
 
   }
@@ -62,6 +62,7 @@ export class HttpClientService {
 export class RequestParameters{
   controller?: string;
   action?: string;
+  querystring?:string;
   header?: HttpHeaders;
   baseUrl?: string;
   fullEndPoint?:string;
@@ -70,3 +71,11 @@ export class RequestParameters{
 
 
 }
+
+
+
+
+//url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.querystring ? `?${requestParameters.querystring}` : ""}`;
+    // url = `${this.url(requestParameters)}${requestParameters.querystring ? `?${requestParameters.querystring}`: ""}`
+    // ${requestParameters.querystring ? `?${requestParameters.querystring}`:""}
+    //url = `${this.url(requestParameters)} ${id ? `/${id}`: ""}`;

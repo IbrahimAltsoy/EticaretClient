@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Create_Product } from 'src/app/contracts/create_product';
+import { List_Product } from 'src/app/contracts/list_product';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class ProductService {
 
   constructor(private httpClientService: HttpClientService) { }
 
-  create(product: Create_Product, successCallBack?:any, errorCallBack?:any){
+  create(product: Create_Product, successCallBack?:()=>void, errorCallBack?:(errorMessage:string)=>void){
     this.httpClientService.post({
       controller:"products"
     },product).subscribe(result=>{
@@ -32,4 +33,37 @@ export class ProductService {
     });
 
   }
+
+
+  // Listeleme metodu
+  async read(page: number=0, size: number=5,successCallBack?: ()=>void, errorCallBack?:(errorMessage:string)=>void):Promise<{totalCount: number; products :List_Product[]}>{
+    const promiseData:Promise<{totalCount: number; products :List_Product[]}>= this.httpClientService.get<{totalCount: number; products :List_Product[]}>({
+      controller :"products",
+      querystring: `page=${page}&size=${size}`
+    }).toPromise();
+
+    promiseData.then(d=>successCallBack())
+    .catch((errorResponse: HttpErrorResponse)=>errorCallBack(errorResponse.message))
+
+    return await promiseData;
+  }
 }
+
+
+
+// this.productService.create(create_product, () => {
+//   this.hideSpinner(SpinnerType.BallScaleMultiple);
+//     this.alertify.message("Fiyat negatif ve boş geçilemez",{
+//       dismissOthers: true,
+//       messageType: MessageType.Success,
+//       position: Position.TopRight
+//     });
+//   }, errorMessage =>{
+//     this.alertify.message(errorMessage,
+//       {
+//         dismissOthers:true,
+//         messageType: MessageType.Error,
+//         position: Position.TopRight
+
+//       });
+//   });
