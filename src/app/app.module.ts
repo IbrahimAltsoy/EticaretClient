@@ -15,10 +15,12 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent,
+
 
 
 
